@@ -10,7 +10,7 @@ _Original text by Rocketseat: https://www.notion.so/ESLint-7e455a7ac78b424892329
 
 Uma outra ferramenta que nos auxilia no momento de padronizarmos o nosso projeto, e talvez seja a mais importante, é o **Eslint**. Com ele conseguimos automatizar os **padrões de códigos** do nosso projeto, e podemos utiliza-lo para projetos em **NodeJS, ReactJS e React Native**.
 
-Por exemplo, no **Javascript** o uso do **ponto e vírgula** ao final de uma linha é **facultativo**, ou seja, diferente de algumas linguagens, a falta dele não interfere para que o código seja compilado. Outra utilização que também é opcional é o uso de **aspas duplas** ou **aspas simples**. 
+Por exemplo, no **Javascript** o uso do **ponto e vírgula** ao final de uma linha é **facultativo**, ou seja, diferente de algumas linguagens, a falta dele não interfere para que o código seja compilado. Outra utilização que também é opcional é o uso de **aspas duplas** ou **aspas simples**.
 
 Já quando estamos criando um objeto, o uso da **vírgula** no último item do objeto também é opcional, como podemos ver no exemplo abaixo.
 
@@ -27,7 +27,7 @@ const aluno = {
 
 No primeiro objeto utilizamos **vírgula** após o valor dentro do atributo **idade**, já no segundo não utilizamos, o que **não** interfere na execução do código.
 
-O **Eslint** integra, não somente para o **VSCode,** mas também com qualquer outro tipo de editor, o que mais uma vez ajuda na padronização do código, caso um outro desenvolvedor esteja desenvolvendo no mesmo projeto, mas não queira usar o **VSCode**. 
+O **Eslint** integra, não somente para o **VSCode,** mas também com qualquer outro tipo de editor, o que mais uma vez ajuda na padronização do código, caso um outro desenvolvedor esteja desenvolvendo no mesmo projeto, mas não queira usar o **VSCode**.
 
 ## Instalação
 
@@ -45,7 +45,7 @@ Uma outra configuração que é geral e precisamos fazer para o **VSCode** forma
 
 ### Node
 
-Pra começar, vamos instalar o **Eslint** como uma dependência de desenvolvimento dentro do nosso projeto **NodeJS**. 
+Pra começar, vamos instalar o **Eslint** como uma dependência de desenvolvimento dentro do nosso projeto **NodeJS**.
 
 ```bash
 yarn add eslint@6.8.0 -D
@@ -100,7 +100,7 @@ Vamos selecionar a opção `Yes`.
 
 Vamos selecionar a opção **Node**, para isso, utilizamos a tecla `Espaço` para desmarcar o **Browser** e selecionarmos a opção `Node`
 
-**6 - How would you like to define a style for your project?** (Qual guia de estilo queremos utilizar?) 
+**6 - How would you like to define a style for your project?** (Qual guia de estilo queremos utilizar?)
 
 - **Use a popular style guide ⇒** Padrões de projetos já criados anteriormente por outra empresa
 - **Answer questions about your style ⇒** Criar seu próprio padrão de projeto
@@ -113,7 +113,7 @@ Vamos selecionar a primeira opção `Use a popular style guide`
 - **Standard: [https://github.com/standard/standard](https://github.com/standard/standard)**
 - **Google: [https://github.com/google/eslint-config-google](https://github.com/google/eslint-config-google)**
 
-Nós iremos utilizar a primeira opção `Airbnb`. Com ela, nós vamos definir que nosso projeto utilizará **ponto e vírgula** ao final de cada linha, utilizará **aspas simples** e algumas outras configurações. Para saber todas as possíveis configurações, acessar a documentação da guia desejada. 
+Nós iremos utilizar a primeira opção `Airbnb`. Com ela, nós vamos definir que nosso projeto utilizará **ponto e vírgula** ao final de cada linha, utilizará **aspas simples** e algumas outras configurações. Para saber todas as possíveis configurações, acessar a documentação da guia desejada.
 Lembrando que, não há um padrão correto, nós iremos utilizar o **Airbnb**, porém você pode utilizar qualquer guia, desde que seu time todo também esteja utilizando.
 
 **8 - What format do you want your config file to be in?** (Qual formato de configuração do Eslint que você deseja salvar?)
@@ -130,7 +130,7 @@ Checking peerDependencies of eslint-config-airbnb-base@latest
 
 ```
 
-Depois que respondemos as perguntas, o **ESLint** irá informar quais as dependências serão necessárias a instalação, de acordo com a sua respostas dadas. 
+Depois que respondemos as perguntas, o **ESLint** irá informar quais as dependências serão necessárias a instalação, de acordo com a sua respostas dadas.
 
 **10 - Would you like to install them now with npm?** (Você deseja instalar as dependências agora utilizando npm?)
 
@@ -221,11 +221,11 @@ O arquivo `.eslintrc.json` finalizado com todas as mudanças tem que ficar assim
 	    "import/resolver": {
 	      "typescript": {}
 	    }
-	  } 
+	  }
 }
 ```
 
-Pronto, nosso **ESLint** já está funcionando e estamos quase finalizando as configurações para padronizar nosso código. 
+Pronto, nosso **ESLint** já está funcionando e estamos quase finalizando as configurações para padronizar nosso código.
 
 Antes de darmos prosseguimento, para entendermos os próximos passos do **Prettier**, dentro da pasta `src` crie um pasta `routes` e crie um arquivo `index.ts` com o seguinte conteúdo dentro dele
 
@@ -316,9 +316,9 @@ Vamos selecionar a opção `Yes`.
 - **Browser**
 - **Node**
 
- Vamos deixar a opção que vem por padrão selecionada, que é **Browser** e apertamos o enter. 
+ Vamos deixar a opção que vem por padrão selecionada, que é **Browser** e apertamos o enter.
 
-**6 - How would you like to define a style for your project?** (Qual guia de estilo queremos utilizar?) 
+**6 - How would you like to define a style for your project?** (Qual guia de estilo queremos utilizar?)
 
 - **Use a popular style guide ⇒** Padrões de projetos já criados anteriormente por outra empresa
 - **Answer questions about your style ⇒** Criar seu próprio padrão de projeto
@@ -331,7 +331,7 @@ Vamos selecionar a primeira opção `Use a popular style guide`
 - **Standard: [https://github.com/standard/standard](https://github.com/standard/standard)**
 - **Google: [https://github.com/google/eslint-config-google](https://github.com/google/eslint-config-google)**
 
-Nós iremos utilizar a primeira opção `Airbnb`. Com ela, nós vamos definir que nosso projeto utilizará **ponto e vírgula** ao final de cada linha, utilizará **aspas simples** e algumas outras configurações. Para saber todas as possíveis configurações, acessar a documentação da guia desejada. 
+Nós iremos utilizar a primeira opção `Airbnb`. Com ela, nós vamos definir que nosso projeto utilizará **ponto e vírgula** ao final de cada linha, utilizará **aspas simples** e algumas outras configurações. Para saber todas as possíveis configurações, acessar a documentação da guia desejada.
 Lembrando que, não há um padrão correto, nós iremos utilizar o **Airbnb**, porém você pode utilizar qualquer guia, desde que seu time todo também esteja utilizando.
 
 **8 - What format do you want your config file to be in?** (Qual formato de configuração do Eslint que você deseja salvar?)
@@ -534,7 +534,7 @@ Vamos selecionar a opção `Yes`.
 
 Vamos desmarcar as duas opções, utilizamos a tecla `Espaço` para desmarcar as opções.
 
-**6 - How would you like to define a style for your project?** (Qual guia de estilo queremos utilizar?) 
+**6 - How would you like to define a style for your project?** (Qual guia de estilo queremos utilizar?)
 
 - **Use a popular style guide ⇒** Padrões de projetos já criados anteriormente por outra empresa
 - **Answer questions about your style ⇒** Criar seu próprio padrão de projeto
@@ -547,7 +547,7 @@ Vamos selecionar a primeira opção `Use a popular style guide`
 - **Standard: [https://github.com/standard/standard](https://github.com/standard/standard)**
 - **Google: [https://github.com/google/eslint-config-google](https://github.com/google/eslint-config-google)**
 
-Nós iremos utilizar a primeira opção `Airbnb`. Com ela, nós vamos definir que nosso projeto utilizará **ponto e vírgula** ao final de cada linha, utilizará **aspas simples** e algumas outras configurações. Para saber todas as possíveis configurações, acessar a documentação da guia desejada. 
+Nós iremos utilizar a primeira opção `Airbnb`. Com ela, nós vamos definir que nosso projeto utilizará **ponto e vírgula** ao final de cada linha, utilizará **aspas simples** e algumas outras configurações. Para saber todas as possíveis configurações, acessar a documentação da guia desejada.
 Lembrando que, não há um padrão correto, nós iremos utilizar o **Airbnb**, porém você pode utilizar qualquer guia, desde que seu time todo também esteja utilizando.
 
 **8 - What format do you want your config file to be in?** (Qual formato de configuração do Eslint que você deseja salvar?)

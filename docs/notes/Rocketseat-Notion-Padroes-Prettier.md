@@ -74,7 +74,7 @@ O arquivo no final vai ficar assim:
 
 ```jsx
 module.exports = {
-  singleQuote: true, 
+  singleQuote: true,
   trailingComma: 'all',
 	arrowParens: 'avoid',
 }
