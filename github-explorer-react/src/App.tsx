@@ -1,8 +1,12 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-function App() {
-  return <h1>Hello Github Explorer user!</h1>;
-}
+import Routes from './routes';
+
+const App: React.FC = () => (
+  <BrowserRouter>
+    <Routes />
+  </BrowserRouter>
+);
 
 export default App;
