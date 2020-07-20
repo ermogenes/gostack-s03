@@ -107,6 +107,102 @@ const Page1: React.FC = () => {
 export default Page1;
 ```
 
+### Styling
+
+You may create any `.css` files and import them. When you do that, the CSS selectors will apply to _all_ applications globally, because the CSS is always global to the page loaded in the browser.
+
+To scope the styling, you may use styled components.
+
+#### Styled Components
+
+Install the package and the types:
+
+```
+yarn add styled-components
+yarn add @types/styled-components -D
+```
+
+Install VsCode extension `vscode-styled-components` for syntax highlighting and IntelliSense.
+
+Create a `styles.ts` file with the styles for the page only. Import `styled` and export a component from it, equivalent to a HTML tag with the CSS in a tagged template string.
+
+```ts
+import styled from 'styled-components';
+
+const size = 48;
+
+export const Title = styled.h1`
+  font-size: ${size + 10}px;
+  color: #3a3a3a;
+`;
+```
+
+`Title` is now a styled component `h1`-based, `58px`-sized gray. You may now use it as a JSX tag just importing the styled component.
+
+```tsx
+import React from 'react';
+
+import { Title } from './styles';    // <--- here
+
+const Dashboard: React.FC = () => {
+  return <Title>Dashboard</Title>;   // <--- and here
+};
+
+export default Dashboard;
+```
+
+#### Global styling
+
+Create `src/styles/global.ts`, import `createGlobalStyle` and export a styled component with the same name and the global style.
+
+```ts
+import { createGlobalStyle } from 'styled-components';
+
+export default createGlobalStyle`
+  * {
+    margin: 0;
+  }
+
+  body {
+    background-color: #f0f0f5;
+  }
+`;
+```
+
+Import it in your `App.ts` and put it outside the router.
+
+💡 Use an empty tag called fragment (`<>` and `</>` to create an empty container).
+
+```tsx
+// ...
+import GlobaStyle from './styles/global';
+// ...
+const App: React.FC = () => (
+  <>
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
+    <GlobaStyle />
+  </>
+);
+// ...
+```
+
+To import Google Fonts, put the `<link>` on your HTML base template.
+
+To use images, put them on `src/assets` and import on a `.ts` CSS file.
+
+```ts
+// ...
+import background from '../assets/background.svg';
+// ...
+  body {
+    background-image: url(${background});
+// ...
+  }
+// ...
+```
+
 ---
 🚧 _Under construction..._
 
