@@ -151,6 +151,42 @@ const Dashboard: React.FC = () => {
 export default Dashboard;
 ```
 
+You may export more than one component per file, and import just the need.
+
+You can nest CSS selectors:
+
+```ts
+export const Form = styled.form`
+  display: flex;
+
+  input {
+    flex: 1;
+  }
+`;
+```
+
+You can nest the pseudo-classes using `&` (means _this_):
+
+```css
+  button {
+    color: #fff;
+
+    &:hover {
+      color: #f00;
+    }
+  }
+```
+
+The `polished` package (`yarn add polished`) manipulate colors (and more) easily:
+
+```ts
+// ...
+import { shade } from 'polished';
+// ...
+  background-color: ${shade(0.2, '#04d361')}; // 20% darker
+// ...
+```
+
 #### Global styling
 
 Create `src/styles/global.ts`, import `createGlobalStyle` and export a styled component with the same name and the global style.
@@ -190,8 +226,20 @@ const App: React.FC = () => (
 
 To import Google Fonts, put the `<link>` on your HTML base template.
 
-To use images, put them on `src/assets` and import on a `.ts` CSS file.
+To use images, put them on `src/assets` and import on a `.ts` file.
 
+As HTML/JSX:
+```tsx
+// ...
+import logoImg from '../../assets/logo.svg';
+// ...
+    <>
+      <img src={logoImg} alt="My Logo" />
+    </>
+// ...
+```
+
+As CSS:
 ```ts
 // ...
 import background from '../assets/background.svg';
@@ -200,6 +248,18 @@ import background from '../assets/background.svg';
     background-image: url(${background});
 // ...
   }
+// ...
+```
+
+#### Icons
+
+Install [`react-icons`](https://react-icons.github.io/react-icons/) with `yarn add react-icons`. Import it an use Font Awesome (`react-icons/fa`), Feather (`react-icons/fi`) and others.
+
+```tsx
+// ...
+import { FiChevronRight } from 'react-icons/fi';
+// ...
+    <FiChevronRight size={20} />
 // ...
 ```
 
