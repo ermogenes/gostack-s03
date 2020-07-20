@@ -263,6 +263,152 @@ import { FiChevronRight } from 'react-icons/fi';
 // ...
 ```
 
+### State
+
+Import `useState` and create state variables on your component code, indicating the state name, the setter function and a default value:
+
+```tsx
+import React, { useState } from 'react';
+// ...
+const MyComponent: React.FC = () => {
+  const [myStateVar, setMyStateVar] = useState('default value');
+  // ...
+  return
+    <input
+      value={myStateVar}
+      onChange={e => setMyStateVar(e.target.value)}
+    />;
+};
+// ...
+```
+
+You can set the value using the setter:
+
+```ts
+setMyStateVar('new value');
+// or clear it
+setMyStateVar('');
+```
+
+### Event handling
+
+You may write a handler to an component event:
+
+```tsx
+import React, { useState, FormEvent } from 'react';
+// ...
+const MyComponent: React.FC = () => {
+  // ...
+  function mySubmitEventHandler(event: FormEvent<HTMLFormElement>): void {
+    // do something...
+    event.preventDefault(); // ... or don't
+  }
+  // ...
+  return
+      <Form onSubmit={mySubmitEventHandler}>
+        // ...
+      </Form>;
+};
+// ...
+```
+
+### API consumption
+
+Install `axios`:
+
+```
+yarn add axios
+```
+
+Create `api.ts` on `src/services`, import `axios` and export an API reference (GitHub API example):
+
+``` ts
+import axios from 'axios';
+
+const githubApi = axios.create({
+  baseURL: 'https://api.github.com/',
+});
+
+export default githubApi;
+```
+
+Import and consume anywhere needed:
+
+```ts
+async function GetDataFromApi(): Promise<void> {
+  const response = await githubApi.get('repos/ermogenes/gostack-s03');
+  const data = response.data;
+  // do something with the data
+}
+```
+
+#### Keep result list on a state
+
+Import `useState` and create a interface to type the response structure. Create the state as a typed array. Call `axios.get` also typed. Update the state.
+
+```tsx
+import React, { useState } from 'react';
+// ...
+interface Repository {
+  full_name: string;
+  description: string;
+  owner: {
+    login: string;
+    avatar_url: string;
+  };
+}
+// ...
+const MyComponent: React.FC = () => {
+  // ...
+  const [repositories, setRepositories] = useState<Repository[]>([]);
+  // ...
+  async function populateRepositoriesState(): Promise<void> {
+    const response = await githubApi.get<Repository>(`/repos/ermogenes/gostack-s03`);
+    const repositoryFound = response.data;
+    setRepositories([...repositories, repositoryFound]);
+  }
+  // ...
+};
+```
+
+😖 Use `// eslint-disable-next-line camelcase` on the prior line to prevent the eslint error if the API do not use camelcase, but you do (like GitHub and me).
+
+To iterate a list and creating elements with it, use `map`.
+
+```tsx
+// ...
+      <Repositories>
+        {repositories.map(repo => (
+          <a key={repo.full_name} href="whateverYouWant">
+            <img
+              src={repo.owner.avatar_url}
+              alt={repo.owner.login}
+            />
+            <div>
+              <strong>{repo.full_name}</strong>
+              <p>{repo.description}</p>
+            </div>
+          </a>
+        ))}
+      </Repositories>
+// ...
+```
+
+---
+
+## Misc
+
+On `eslintrc.json` rules, you may disable errors for missing explicit return types on expressions:
+
+```json
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          {
+            "allowExpressions": true
+          }
+        ],
+```
+
 ---
 🚧 _Under construction..._
 
