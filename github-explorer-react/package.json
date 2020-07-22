@@ -1,5 +1,6 @@
 {
   "name": "github-explorer-react",
+  "homepage": "https://ermogenes.github.io/gostack-s03/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -30,7 +31,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": {
     "production": [
@@ -51,6 +54,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "gh-pages": "^3.1.0",
     "prettier": "^2.0.5"
   }
 }
