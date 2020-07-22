@@ -408,6 +408,13 @@ const MyComponent: React.FC = () => {
 
 ❗ `localStorage.getItem` and `localStorage.setItem` get/sets the key/value on local storage.
 
+💡 Pro tip: use `useEffect` without any state (`[]`) to run the effect once and never more.
+
+```ts
+  useEffect(() => {
+    // Your code
+  }, []);
+```
 
 ### API consumption
 
@@ -580,6 +587,32 @@ On `eslintrc.json` rules, you may disable errors for missing explicit return typ
         ],
 ```
 
----
-🚧 _Under construction..._
+## Javascript general tips
 
+*Serializing and parallelizing async calls*
+
+```ts
+// Serial, with async/await
+async function serialLoadData(): Promise<void> {
+  const responseA = await myAsyncCallA();
+  const responseB = await myAsyncCallB();
+  doSomethingWith(responseA);
+  doSomethingWith(responseB);
+}
+serialLoadData();
+
+// Parallel, with async/await
+async function parallelLoadData(): Promise<void> {
+  const [responseA, responseB] = await Promise.all([
+    myAsyncCallA(),
+    myAsyncCallB(),
+  ]);
+  doSomethingWith(responseA);
+  doSomethingWith(responseB);
+}
+parallelLoadData();
+
+// Parallel, with .then
+myAsyncCallA().then((responseA) => { doSomethingWith(responseA) });
+myAsyncCallB().then((responseB) => { doSomethingWith(responseB) });
+```
