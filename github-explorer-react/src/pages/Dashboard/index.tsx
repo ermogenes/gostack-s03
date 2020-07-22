@@ -5,7 +5,7 @@ import api from '../../services/api';
 
 import logoImg from '../../assets/logo.svg';
 
-import { Title, Form, Repositories } from './styles';
+import { Title, Form, Repositories, Error } from './styles';
 
 interface Repository {
   // eslint-disable-next-line camelcase
@@ -20,6 +20,7 @@ interface Repository {
 
 const Dashboard: React.FC = () => {
   const [repositoryQuery, setRepositoryQuery] = useState('');
+  const [inputError, setInputError] = useState('');
   const [repositories, setRepositories] = useState<Repository[]>([]);
 
   async function handleRepositoryQuerySearch(
@@ -27,19 +28,29 @@ const Dashboard: React.FC = () => {
   ): Promise<void> {
     event.preventDefault();
 
-    const response = await api.get<Repository>(`/repos/${repositoryQuery}`);
+    if (!repositoryQuery) {
+      setInputError('Enter a valid "author/repository"');
+      return;
+    }
 
-    const repositoryFound = response.data;
-    setRepositories([...repositories, repositoryFound]);
+    try {
+      const response = await api.get<Repository>(`/repos/${repositoryQuery}`);
 
-    setRepositoryQuery('');
+      const repositoryFound = response.data;
+      setRepositories([...repositories, repositoryFound]);
+
+      setRepositoryQuery('');
+      setInputError('');
+    } catch (Err) {
+      setInputError('Not found, or communication error.');
+    }
   }
 
   return (
     <>
       <img src={logoImg} alt="GitHub Explorer Logo" />
       <Title>GitHub Repository Explorer</Title>
-      <Form onSubmit={handleRepositoryQuerySearch}>
+      <Form hasError={!!inputError} onSubmit={handleRepositoryQuerySearch}>
         <input
           value={repositoryQuery}
           onChange={e => setRepositoryQuery(e.target.value)}
@@ -47,6 +58,9 @@ const Dashboard: React.FC = () => {
         />
         <button type="submit">Search</button>
       </Form>
+
+      {inputError && <Error>{inputError}</Error>}
+
       <Repositories>
         {repositories.map(repository => (
           <a key={repository.full_name} href="todo">

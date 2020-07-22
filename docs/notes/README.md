@@ -263,6 +263,49 @@ import { FiChevronRight } from 'react-icons/fi';
 // ...
 ```
 
+#### Props
+
+You may create an attribute on a styled component tag using Props. Create an interface and use it as the styled component type. Access the property in an interpolation creating an arrow function with the `props` parameter.
+
+🍌 To write CSS inside the code part of a interpolation, import `css` from `styled-components`.
+
+```tsx
+import styled, { css } from 'styled-components';
+// ...
+interface FormProps {
+  hasError: boolean;
+}
+// ...
+export const Form = styled.form<FormProps>`
+  // ..
+  input {
+    border: 2px solid #fff;
+    // ..
+
+    ${props =>
+      props.hasError &&
+      css`
+        border-color: #c53030;
+        // ..
+      `}
+  }
+  // ..
+`;
+// ...
+```
+
+Use the prop on your component JSX. In this example, it's `true` if `inputError` has any content.
+
+```tsx
+  //..
+      <Form hasError={!!inputError} ... >
+        // ..
+        <input ... />
+        // ...
+      </Form>
+  //..
+```
+
 ### State
 
 Import `useState` and create state variables on your component code, indicating the state name, the setter function and a default value:
@@ -391,6 +434,39 @@ To iterate a list and creating elements with it, use `map`.
           </a>
         ))}
       </Repositories>
+// ...
+```
+
+#### Catching errors
+
+A commom strategy is using validation and exception handling to manage error conditions.
+
+Create a state with the message, and show it condittionally on a styled component (or somewhere else).
+
+```tsx
+// ...
+  const [inputError, setInputError] = useState('');
+    // ...
+    // Validation
+    if (!valid) {
+      setInputError('Validation message');
+      return;
+    }
+    // ...
+    // Exception handling
+    try {
+      const response = await api.get //...
+      // ...
+      setInputError(''); // <--- Clean the error in case of success
+    } catch (Err) {
+      setInputError('Error message');
+    }
+    //
+    return (
+      // ...
+      {inputError && <Error>{inputError}</Error>}
+      // ...
+    );
 // ...
 ```
 
