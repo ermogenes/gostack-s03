@@ -524,6 +524,47 @@ Create a state with the message, and show it condittionally on a styled componen
 // ...
 ```
 
+### Navigation
+
+Anchors will cause page reloading. To navigate without reload, use the `Link` component from `react-router-dom`.
+
+```tsx
+// ..
+import { Link } from 'react-router-dom';
+// ..
+  <Link to="/my-route">Link to my route</Link>
+  <Link to={ `/my-route/${myParameter}` }>Link to my route with variable URL parameter</Link>
+// ..
+```
+
+In the router, define one or more route parameter:
+
+```tsx
+    <Route path="/myRoute/:paramName/:restOfParams+" component={MyComponent} />
+```
+
+In the component, import `useRouteMatch` from `react-router-dom` and call it typed with an interface created for your parameters.
+
+```tsx
+// ..
+import { useRouteMatch } from 'react-router-dom';
+// ..
+interface MyComponentParams {
+  parmName: string;
+  restOfParms: string;
+}
+// ..
+const MyComponent: React.FC = () => {
+  // ..
+  const { params } = useRouteMatch<MyComponentParams>();
+  return <h1>Called wit parameter {params.parmName}</h1>;
+  // ..
+};
+// ..
+```
+
+🍌 The `return` line above presents an error on EsLint: `react/jsx-one-expression-per-line`. You may disable that on `eslintrc.json` rules: `"react/jsx-one-expression-per-line": "off",`.
+
 ---
 
 ## Misc
