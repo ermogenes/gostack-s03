@@ -355,6 +355,60 @@ const MyComponent: React.FC = () => {
 // ...
 ```
 
+### Effects and LocalStorage
+
+When a state changes, you may run a code using effects.
+
+Import `useEffects` from `react` and call it from a component passing a handler function and an array of states to monitor.
+
+In this example, the handler puts the `myStateVar` state value on the `myStateVar` key on Local Storage.
+
+* Local Storage are address-based. Use an unique name for your app keys, like `@MyAppName:myStateVar`.
+* Use `JSON.stringify(myArrayStateVar)` to store values of arrays.
+* Use an arrow function to generate the array with the values parsed from local storage.
+
+Example with string state:
+
+```ts
+import React, { useState, useEffect } from 'react';
+// ...
+const MyComponent: React.FC = () => {
+  // ...
+  const [myStateVar, setMyStateVar] = useState(
+    localStorage.getItem('@MyAppName:myStateVar') || '',
+  );
+  // ...
+  useEffect(() => {
+    localStorage.setItem('@MyAppName:myStateVar', myStateVar);
+  }, [myStateVar]);
+  // ...
+};
+// ...
+```
+
+Example with array state:
+
+```ts
+import React, { useState, useEffect } from 'react';
+// ...
+const MyComponent: React.FC = () => {
+  // ...
+  const [myArrayStateVar, setMyArrayStateVar] = useState<MyInterface[]>(() => {
+    const storedArray = localStorage.getItem('@MyAppName:myArrayStateVar');
+    return storedArray ? JSON.parse(storedArray) : [];
+  });
+  // ...
+  useEffect(() => {
+    localStorage.setItem('@MyAppName:myArrayStateVar', myArrayStateVar);
+  }, [myArrayStateVar]);
+  // ...
+};
+// ...
+```
+
+❗ `localStorage.getItem` and `localStorage.setItem` get/sets the key/value on local storage.
+
+
 ### API consumption
 
 Install `axios`:
