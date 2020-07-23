@@ -587,6 +587,14 @@ On `eslintrc.json` rules, you may disable errors for missing explicit return typ
         ],
 ```
 
+## Routing and GitHub Pages
+
+To fix subpath issues with Github Pages, use `basename` on `BrowserRouter`.
+
+```tsx
+<BrowserRouter basename={process.env.PUBLIC_URL}>
+```
+
 ## Javascript general tips
 
 *Serializing and parallelizing async calls*
