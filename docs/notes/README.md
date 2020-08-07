@@ -306,6 +306,101 @@ Use the prop on your component JSX. In this example, it's `true` if `inputError`
   //..
 ```
 
+### Components
+
+You may create full-featured styled components based on existent HTML tags.
+
+Example: personalize `input` and `button`:
+
+```tsx
+// ...
+import MyInput from '../../components/MyInput';
+import MyButton from '../../components/MyButton';
+// ...
+          <MyInput name="password" type="password" placeholder="Senha" />
+          <MyButton type="submit">Entrar</MyButton>
+// ...
+```
+
+In the `input` below, all the HTML attributes are accepted, and `name` is required (default is `name?: string`).
+
+```tsx
+import React, { InputHTMLAttributes } from 'react';
+
+// To stylize the component
+import { Container } from './styles';
+
+// All <input> attributes, but name turns required
+interface MyInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  name: string;
+}
+
+const MyInput: React.FC<MyInputProps> = props => (
+  <Container>
+    <input {...props} />
+  </Container>
+);
+
+export default MyInput;
+```
+
+In the `button`, all the attributes are the same, but a default `type` is fixed equals `button`.
+
+```tsx
+import React, { ButtonHTMLAttributes } from 'react';
+
+import { Container } from './styles';
+
+type MyButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
+
+const MyButton: React.FC<MyButtonProps> = ({ children, ...otherProps }) => (
+  <Container type="button" {...otherProps}>
+    {children}
+  </Container>
+);
+
+export default MyButton;
+```
+
+The `Container` is a `styled.button`.
+
+#### Components as Props
+
+You may create a componet prop. Below, it receives a `react-icons` component.
+
+```tsx
+// ...
+import { IconBaseProps } from 'react-icons';
+// ...
+interface MyInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  // ...
+  icon: React.ComponentType<IconBaseProps>;
+  // ...
+}
+// ...
+const MyInput: React.FC<MyInputProps> = ({ icon: Icon, ...otherProps }) => (
+  // ...
+    {Icon && <Icon size={20} />}
+    <input {...otherProps} />
+  // ...
+);
+
+export default MyInput;
+```
+
+Usage:
+
+```tsx
+    <MyInput icon={FiMail} name="email" placeholder="E-mail" />
+```
+
+😖 It maybe necessary to disable some unnecessary (TypeScript!) ESLint rules:
+
+```json
+      "react/jsx-props-no-spreading": "off",
+      "react/prop-types": "off",
+```
+
 ### State
 
 Import `useState` and create state variables on your component code, indicating the state name, the setter function and a default value:
