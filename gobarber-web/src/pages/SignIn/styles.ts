@@ -26,41 +26,6 @@ export const Content = styled.div`
       margin-bottom: 24px;
     }
 
-    input {
-      background: #232129;
-      color: #f4edeb;
-
-      &::placeholder {
-        color: #666360;
-      }
-
-      border-radius: 10px;
-      border: 2px solid #232129;
-      padding: 16px;
-      width: 100%;
-
-      & + input {
-        margin-top: 8px;
-      }
-    }
-
-    button {
-      background: #ff9000;
-      height: 56px;
-      border-radius: 10px;
-      border: 0;
-      padding: 0 16px;
-      color: #312e38;
-      width: 100%;
-      font-weight: 500;
-      margin-top: 16px;
-      transition: background-color 0.2s;
-
-      &:hover {
-        background: ${shade(0.2, '#ff9000')};
-      }
-    }
-
     a {
       color: #f4edeb;
       display: block;
@@ -73,6 +38,7 @@ export const Content = styled.div`
       }
     }
   }
+
   > a {
     color: #ff9000;
     display: block;
