@@ -675,10 +675,29 @@ To reference a DOM element, use the `useRef` hook:
 ```tsx
 import React, { useRef } from 'react';
 // ...
-  const inputRef = useRef(null);
+  const inputRef = useRef<HtmlInputElement>(null);
 // ...
       <input ref={inputRef} />
-``
+```
+
+Read the `value` of the `input` with `inputRef.current?.value`.
+
+### Callbacks
+
+Use callbacks to tell React not to recreate the function all the times the component is rendered.
+
+```tsx
+import React, { useCallback } from 'react';
+// ..
+const MyComponent: React.FC = () => {
+  // ..
+  const handleXYZ = useCallback(() => {
+    // function code
+  }, []);
+  // ..
+};
+// ..
+```
 
 ---
 
