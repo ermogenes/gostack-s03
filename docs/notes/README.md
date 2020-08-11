@@ -667,6 +667,19 @@ const MyComponent: React.FC = () => {
 
 🍌 The `return` line above presents an error on EsLint: `react/jsx-one-expression-per-line`. You may disable that on `eslintrc.json` rules: `"react/jsx-one-expression-per-line": "off",`.
 
+
+### Ref's
+
+To reference a DOM element, use the `useRef` hook:
+
+```tsx
+import React, { useRef } from 'react';
+// ...
+  const inputRef = useRef(null);
+// ...
+      <input ref={inputRef} />
+``
+
 ---
 
 ## Misc
@@ -718,4 +731,52 @@ parallelLoadData();
 // Parallel, with .then
 myAsyncCallA().then((responseA) => { doSomethingWith(responseA) });
 myAsyncCallB().then((responseB) => { doSomethingWith(responseB) });
+```
+
+## Rocketseat's Unform
+
+The lib parses the registered form fields in just one object.
+
+Install:
+
+```
+yarn add @unform/core @unform/web
+```
+
+In the page component:
+
+```tsx
+// ...
+import { Form } from '@unform/web';
+// ...
+  function handleSubmit(data: object): void {
+    console.log(data);
+  }
+// ...
+    <Form initialData={{ name: 'Default' }} onSubmit={handleSubmit}>
+    // ...
+      <Input name="name" placeholder="Name" />
+    // ...
+    </Form>
+// ...
+```
+
+The `Form` component is defined in Unform. The `Input`:
+
+```tsx
+// ...
+import { useField } from '@unform/core';
+// ...
+const Input: React.FC<InputProps> = ({ name, ...otherProps }) => {
+  const { fieldName, defaultValue, error, registerField } = useField(name);
+  useEffect(() => {
+    registerField({
+      name: fieldName, // the name of the field, also used in the object
+      ref: inputRef.current, // a ref to the input on DOM
+      path: 'value', // the path for access the value inputted
+    });
+  }, [fieldName, registerField]);
+// ...
+      <input defaultValue={defaultValue} ref={inputRef} {...otherProps} />
+// ...
 ```
